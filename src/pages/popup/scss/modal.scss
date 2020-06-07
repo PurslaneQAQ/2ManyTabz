@@ -1,21 +1,43 @@
-/* From: https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/ */
-.modal-wrapper {
+/* Adapted From: https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/ */
+.modal-wrapper-active {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(50, 50, 50, 0.5);
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  transition: opacity ease-in-out 0.3s;
+
+  .modal{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: white;
+    padding: 20px;
+    transition: transform ease-in-out 0.3s;
+  }
+}
+/*********************************************/
+
+.modal-wrapper-enter {
+  opacity: 0;
+
+  .modal{
+    transform: translate(-50%, 0);
+  }
 }
 
-.modal{
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  background-color: white;
-  padding: 20px;
+.modal-wrapper-exit {
+  opacity: 1;
+}
+
+.modal-wrapper-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+
+  .modal{
+    transform: translate(-50%, 0);
+  }
 }

@@ -33,6 +33,13 @@ class ProjectDetail extends Component {
     this.props.requestLoadResources(newActive);
   }
 
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error && error !== prevProps.error) {
+      this.props.history.push({ pathname: '/modal:error', state: { modal: true } });
+    }
+  }
+
   handleDeleteProject() {
     this.setState({ deleteRequested: 1 });
     this.props.requestDeleteProject(this.props.activeProj);
@@ -68,6 +75,7 @@ const mapStateToProps = (reduxState) => ({
   tabs: reduxState.tabs.tabList,
   activeWindow: reduxState.tabs.activeWindow,
   activeProj: reduxState.projects.activeProj,
+  error: reduxState.error.errorMsg,
 });
 
 export default connect(mapStateToProps, {

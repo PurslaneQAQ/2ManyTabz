@@ -32,6 +32,13 @@ class TabManager extends Component {
     this.props.requestLoadProjects();
   }
 
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error && error !== prevProps.error) {
+      this.props.history.push({ pathname: '/modal:error', state: { modal: true } });
+    }
+  }
+
   setFilter(filter) {
     this.setState({ filter });
   }
@@ -85,6 +92,7 @@ const mapStateToProps = (reduxState) => ({
   activeWindow: reduxState.tabs.activeWindow,
   projectList: reduxState.projects.projectList,
   activeProj: reduxState.projects.activeProj,
+  error: reduxState.error.errorMsg,
 });
 
 export default connect(mapStateToProps, { requestGetTabs, requestLoadProjects })(TabManager);

@@ -3,9 +3,6 @@ import ActionTypes from '../../../shared/actionTypes';
 export default function tabReducer(state = {}, action) {
   const newState = state;
   switch (action.type) {
-    case ActionTypes.CHROME_ERROR:
-      console.log(action.error);
-      return state;
     case ActionTypes.GET_TABS_FULLFILLED:
       return {
         ...state, ...action.tabs,

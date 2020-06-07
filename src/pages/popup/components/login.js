@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './sharedview/header';
 import { requestSignIn, requestSignUp } from '../../../shared/actions/loginactions';
+import { ignoreError, frontendError } from '../../../shared/actions/erroractions';
 import '../scss/login.scss';
 
 // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -19,7 +20,6 @@ class Login extends Component {
       email: '',
       password: '',
       confpw: '',
-      error: '',
     };
     // this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
     this.submitSignIn = this.submitSignIn.bind(this);
@@ -39,9 +39,7 @@ class Login extends Component {
   }
 
   onTypeChange(event) {
-    this.setState({
-      error: '',
-    });
+    this.props.ignoreError();
   }
 
   submitSignIn = () => {
@@ -64,16 +62,14 @@ class Login extends Component {
   checkEmail(e) {
     const email = e ? e.target.value : this.state.email;
     if (!email || !validateEmail(email)) {
-      this.setState({
-        error: 'Please enter a valid email!',
-      });
+      this.props.frontendError('Please enter a valid email!');
       if (e)e.target.focus();
       return false;
     } else {
       this.setState({
         email,
-        error: '',
       });
+      this.props.ignoreError();
       return true;
     }
   }
@@ -81,16 +77,14 @@ class Login extends Component {
   checkPassword(e) {
     const password = e ? e.target.value : this.state.password;
     if (!password) {
-      this.setState({
-        error: 'Please enter your password!',
-      });
+      this.props.frontendError('Please enter a valid email!');
       if (e)e.target.focus();
       return false;
     } else {
       this.setState({
         password,
-        error: '',
       });
+      this.props.ignoreError();
       return true;
     }
   }
@@ -98,16 +92,14 @@ class Login extends Component {
   checkConfPw(e) {
     const confpw = e ? e.target.value : this.state.password;
     if (!confpw) {
-      this.setState({
-        error: 'The confirmed password is different from your password!',
-      });
+      this.props.frontendError('Please enter a valid email!');
       if (e)e.target.focus();
       return false;
     } else {
       this.setState({
         confpw,
-        error: '',
       });
+      this.props.ignoreError();
       return true;
     }
   }
@@ -115,25 +107,23 @@ class Login extends Component {
   checkName(e) {
     const userName = e ? e.target.value : this.state.name;
     if (!userName || !/^[a-zA-Z]+$/.test(String(userName))) {
-      this.setState({
-        error: 'Please enter a user name!',
-      });
+      this.props.frontendError('Please enter a valid email!');
       if (e)e.target.focus();
       return false;
     } else {
       this.setState({
         userName,
-        error: '',
       });
+      this.props.ignoreError();
       return true;
     }
   }
 
   render() {
     const {
-      userName, email, password, confpw, error,
+      userName, email, password, confpw,
     } = this.state;
-    const { rmError } = this.props;
+    const { error } = this.props;
     const signInBtn = (
       <button
         type="button"
@@ -172,12 +162,7 @@ class Login extends Component {
       <input type="password" placeholder="Comfirmed Password" defaultValue={confpw} onBlur={this.checkConfPw} />
     );
 
-    const errorDiv = error || rmError
-      ? (
-        <div className="error-msg">{ error
-      || rmError }
-        </div>
-      ) : null;
+    const errorDiv = error ? <div className="error-msg">{ error } </div> : null;
 
     return (
       <div id="login">
@@ -218,7 +203,9 @@ class Login extends Component {
 const mapStateToProps = (reduxState) => ({
   authenticated: reduxState.auth.authenticated,
   userName: reduxState.auth.userName,
-  rmError: reduxState.auth.error,
+  error: reduxState.error.errorMsg,
 });
 
-export default connect(mapStateToProps, { requestSignIn, requestSignUp })(Login);
+export default connect(mapStateToProps, {
+  requestSignIn, requestSignUp, ignoreError, frontendError,
+})(Login);

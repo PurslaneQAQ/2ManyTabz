@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { requestUpdateProject } from '../../../../shared/actions/projectactions';
+import { frontendError } from '../../../../shared/actions/erroractions';
 
 class ProjectEditor extends Component {
   constructor(props) {
@@ -28,10 +29,15 @@ class ProjectEditor extends Component {
     if (isEditing) {
       if (updatedProject.projectName.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
         console.log('Project Name can not be empty!');
+        this.props.frontendError('Project Name can not be empty!');
+        return;
+      } else if (updatedProject.projectName.indexOf('/') !== -1) {
+        this.props.frontendError('Project Name shouldn\' contain \'/\'!');
         return;
       } else if (updatedProject.projectName !== currentProject.projectName && projectList.includes(updatedProject.projectName)) {
         console.log('exists!');
         // Todo: show the message!
+        this.props.frontendError('A Project with the same name already exist!');
         return;
       } else if (updatedProject.projectName === currentProject.projectName
         && updatedProject.projectNote === currentProject.projectNote) {
@@ -137,4 +143,4 @@ const mapStateToProps = (reduxState) => ({
   projectList: reduxState.projects.projectList,
 });
 
-export default connect(mapStateToProps, { requestUpdateProject })(ProjectEditor);
+export default connect(mapStateToProps, { requestUpdateProject, frontendError })(ProjectEditor);

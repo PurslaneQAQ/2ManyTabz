@@ -28,7 +28,6 @@ const initialState = {
     projectList: loadProjectList(), // An array of projects
     currentProject: JSON.parse(Values.emptyProject), // { projectName: '', projectNote: '', resources: {} }
     activeProj: Values.defaultProject, // General
-    error: '',
     synchronizing: 0,
   },
   preferences: loadPreferences(),
@@ -37,7 +36,9 @@ const initialState = {
   auth: {
     authenticated: false,
     userName: '',
-    error: '',
+  },
+  error: {
+    errorMsg: '',
   },
 };
 
