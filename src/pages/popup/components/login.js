@@ -64,7 +64,7 @@ class Login extends Component {
     const email = e ? e.target.value : this.state.email;
     if (!email || !validateEmail(email)) {
       this.props.frontendError('Please enter a valid email!');
-      if (e)e.target.focus();
+      // if (e)e.target.focus();
       return false;
     } else {
       this.setState({
@@ -79,7 +79,10 @@ class Login extends Component {
     const password = e ? e.target.value : this.state.password;
     if (!password) {
       this.props.frontendError('Please enter a password!');
-      if (e)e.target.focus();
+      // if (e)e.target.focus();
+      return false;
+    } else if (password.length < 3) {
+      this.props.frontendError('Password should be longer than 3 charactors!');
       return false;
     } else {
       this.setState({
@@ -94,7 +97,6 @@ class Login extends Component {
     const confpw = e ? e.target.value : this.state.password;
     if (!confpw) {
       this.props.frontendError('Please enter the same password!');
-      if (e)e.target.focus();
       return false;
     } else {
       this.setState({
@@ -109,7 +111,7 @@ class Login extends Component {
     const userName = e ? e.target.value : this.state.name;
     if (!userName || !/^[a-zA-Z]+$/.test(String(userName))) {
       this.props.frontendError('Please enter a name consists of letters!');
-      if (e)e.target.focus();
+      // if (e)e.target.focus();
       return false;
     } else {
       this.setState({
@@ -148,19 +150,39 @@ class Login extends Component {
     );
 
     const nameDiv = (
-      <input type="text" placeholder="Name(should contain only charactors)" defaultValue={userName} onBlur={this.checkName} />
+      <input type="text"
+        placeholder="Name(should contain only charactors)"
+        defaultValue={userName}
+        onChange={this.props.ignoreError}
+        onBlur={this.checkName}
+      />
     );
 
     const emailDiv = (
-      <input type="text" placeholder="Email" defaultValue={email} onBlur={this.checkEmail} />
+      <input type="text"
+        placeholder="Email"
+        defaultValue={email}
+        onChange={() => { if (this.props.error) this.props.ignoreError(); }}
+        onBlur={this.checkEmail}
+      />
     );
 
     const passDiv = (
-      <input type="password" placeholder="Password" defaultValue={password} onBlur={this.checkPassword} />
+      <input type="password"
+        placeholder="Password"
+        defaultValue={password}
+        onChange={() => { if (this.props.error) this.props.ignoreError(); }}
+        onBlur={this.checkPassword}
+      />
     );
 
     const confPwDiv = (
-      <input type="password" placeholder="Comfirmed Password" defaultValue={confpw} onBlur={this.checkConfPw} />
+      <input type="password"
+        placeholder="Comfirmed Password"
+        defaultValue={confpw}
+        onChange={() => { if (this.props.error) this.props.ignoreError(); }}
+        onBlur={this.checkConfPw}
+      />
     );
 
     const errorDiv = error ? <div className="error-msg">{ error } </div> : null;

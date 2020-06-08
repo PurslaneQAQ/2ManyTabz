@@ -62,7 +62,7 @@ class ResourceView extends Component {
     }
     return (
       <div id="resource-view">
-        <FontAwesomeIcon icon="star" className="resource-icon" />
+        <FontAwesomeIcon icon="star" className="resource-icon" title="save all opened tabs as resources" onClick={() => this.props.saveAllTabs()} />
         <div className="thin-row-container">
           <div className="input-group">
             <select name="type" value={filter.type} onChange={(e) => { this.setFilterType(e.target.value); }}>

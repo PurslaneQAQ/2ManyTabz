@@ -249,9 +249,9 @@ li span.full-title{
     }
     .btn:nth-of-type(2){
       right: 7px;
-      :hover{
-        color: $resource-color;
-      }
+    }
+    .btn:nth-of-type(2):hover{
+      color: $resource-color;
     }
     div:last-of-type{
       padding: 3.5px 4px;

@@ -31,12 +31,12 @@ class ProjectEditor extends Component {
         console.log('Project Name can not be empty!');
         this.props.frontendError('Project Name can not be empty!');
         return;
-      } else if (updatedProject.projectName.indexOf('/') !== -1) {
-        this.props.frontendError('Project Name shouldn\' contain \'/\'!');
+      } if (updatedProject.projectName.indexOf('/') !== -1
+      || updatedProject.projectName.indexOf('\\') !== -1) {
+        this.props.frontendError('Project name shouldn\'t contain \\ or / !');
         return;
       } else if (updatedProject.projectName !== currentProject.projectName && projectList.includes(updatedProject.projectName)) {
         console.log('exists!');
-        // Todo: show the message!
         this.props.frontendError('A Project with the same name already exist!');
         return;
       } else if (updatedProject.projectName === currentProject.projectName
@@ -59,14 +59,14 @@ class ProjectEditor extends Component {
   }
 
   onNameChange(event) {
-    const projectName = event.target.value;
+    const projectName = event.target.value.substr(0, 30);
     this.setState((prevState) => ({
       updatedProject: { ...prevState.updatedProject, projectName },
     }));
   }
 
   onNoteChange(event) {
-    const projectNote = event.target.value;
+    const projectNote = event.target.value.substr(0, 60);
     this.setState((prevState) => ({
       updatedProject: { ...prevState.updatedProject, projectNote },
     }));

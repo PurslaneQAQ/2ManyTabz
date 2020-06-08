@@ -1,5 +1,10 @@
 @import "./variables.scss";
 
+@keyframes rotate {
+  0%   {transform: rotate(0deg);}
+  40%  {transform: rotate(90deg);}
+}
+
 #project-detail{
   #tab-grid, #tab-list {
     height: 194px;
@@ -26,10 +31,17 @@
 
 #resource-view>.resource-icon{
   position: absolute;
+  display: inline-block;
   top: 11px;
   left: 7px;
   font-size: 1.5rem;
   color: $resource-color;
+}
+
+#resource-view>.resource-icon:hover{
+  cursor: pointer;
+  animation-name: rotate;
+  animation-duration: 1s;
 }
 
 #resource-list{

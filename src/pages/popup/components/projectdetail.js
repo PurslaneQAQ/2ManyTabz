@@ -8,7 +8,9 @@ import ResourceView from './detailview/resourceview';
 import Header from './sharedview/header';
 import Footer from './sharedview/footer';
 import { requestGetTabs } from '../../../shared/actions/tabactions';
-import { requestLoadResources, requestDeleteProject, switchProject } from '../../../shared/actions/projectactions';
+import {
+  requestLoadResources, requestDeleteProject, switchProject, requestAddResources,
+} from '../../../shared/actions/projectactions';
 import '../scss/projectdetail.scss';
 
 
@@ -76,7 +78,7 @@ class ProjectDetail extends Component {
         {/* <DisplaySetting setFilter={this.setFilter} switchView={this.props.requestSwitchView} /> */}
         <ProjectEditor />
         <TabView editing tabs={tabShow} filter={this.state.filter} />
-        <ResourceView />
+        <ResourceView saveAllTabs={() => { this.props.requestAddResources(tabShow); }} />
         <div className="thin-row-container"><button type="button" className="warning" onClick={this.handleDeleteProject}>Delete Project</button></div>
         <Footer />
       </div>
@@ -92,5 +94,5 @@ const mapStateToProps = (reduxState) => ({
 });
 
 export default connect(mapStateToProps, {
-  requestGetTabs, requestDeleteProject, requestLoadResources, switchProject,
+  requestGetTabs, requestDeleteProject, requestLoadResources, requestAddResources, switchProject,
 })(ProjectDetail);
