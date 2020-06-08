@@ -1,9 +1,8 @@
 import axios from 'axios';
 import ActionTypes from '../shared/actionTypes';
 
-const rootUrl = 'http://localhost:9090/api';
-// the next line is where our database will be stored!
-// const rootUrl = 'https://too-many-tabz.herokuapp.com/api';
+// const rootUrl = 'http://localhost:9090/api';
+const rootUrl = 'https://two-many-tabz.herokuapp.com/api';
 
 const serverError = (dispatch, error) => {
   console.log(error);

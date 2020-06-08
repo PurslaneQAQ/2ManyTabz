@@ -25,8 +25,9 @@ class ProjectCreator extends Component {
       this.props.frontendError('Project name can not be empty!');
       return;
     }
-    if (this.state.projectName.indexOf('/') !== -1) {
-      this.props.frontendError('Project name shouldn\'t contain \'/\'!');
+    if (this.state.projectName.indexOf('/') !== -1
+    || this.state.projectName.indexOf('\\') !== -1) {
+      this.props.frontendError('Project name shouldn\'t contain \\ or / !');
       return;
     }
     if (!this.props.projectList.includes(this.state.projectName)) {
@@ -41,7 +42,7 @@ class ProjectCreator extends Component {
     return (
       <form onSubmit={this.handleSubmitNew}>
         <div className="input-group">
-          <input type="text" name="title" placeholder="Project Name (should't contain '\')" onBlur={this.handleNameChange} />
+          <input type="text" name="title" placeholder="Project Name (should't contain / or \)" onBlur={this.handleNameChange} />
           <button type="submit"> Add Project </button>
         </div>
       </form>
