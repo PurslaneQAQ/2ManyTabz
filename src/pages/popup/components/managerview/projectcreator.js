@@ -42,7 +42,7 @@ class ProjectCreator extends Component {
       <form onSubmit={this.handleSubmitNew}>
         <div className="input-group">
           <input type="text" name="title" placeholder="Project Name (should't contain '\')" onBlur={this.handleNameChange} />
-          <button type="submit" className="primary"> Add Project </button>
+          <button type="submit"> Add Project </button>
         </div>
       </form>
     );
