@@ -129,6 +129,7 @@
 
     span:first-of-type{
       color:black;
+      margin-right: 5px;
     }
 
     svg{
@@ -144,7 +145,13 @@
       overflow: hidden;
       color: #888;
       font-size: 11px;
+      margin-right: 5px;
     }
+
+    .trim-example:nth-last-child(2) {
+      max-width: 200px;
+    }
+
     .trim-example+span{
       color: #888;
       font-size: 11px;

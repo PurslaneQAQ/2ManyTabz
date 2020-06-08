@@ -29,8 +29,8 @@ const Project = (props) => {
       <span>
         <FontAwesomeIcon icon={['far', 'folder']} />
         <span>{projectTitle}</span>
-        <span className="trim-example">{example ? `: ${example} ` : ''}</span>
-        <span>{ids.length > 1 ? `and ${ids.length - 1} other tabs ` : ''}</span>
+        {example ? <span className="trim-example">{`${example} `}</span> : ''}
+        {ids.length > 1 ? <span>{`and ${ids.length - 1} other tabs `}</span> : ''}
         {projectTitle === Values.defaultProject ? null : <button className="submit"><Link to={`/project/:${projectTitle}`}>Edit</Link></button> }
       </span>
       {ids.length > 0 ? (
