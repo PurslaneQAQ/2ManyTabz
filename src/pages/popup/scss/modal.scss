@@ -1,11 +1,15 @@
 /* Adapted From: https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/ */
-.modal-wrapper-active {
+.modal-wrapper-enter,
+.modal-wrapper-active, 
+.modal-wrapper-enter-done,
+.modal-wrapper-exit,
+.modal-wrapper-exit-active{
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(50, 50, 50, 0.5);
+  background-color: rgba(60, 60, 65, 0.8);
   transition: opacity ease-in-out 0.3s;
 
   .modal{
@@ -13,9 +17,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 72%;
+    padding: 28px;
+    border-radius: 5px;
     background-color: white;
-    padding: 20px;
+    font-size: 13px;
     transition: transform ease-in-out 0.3s;
   }
 }

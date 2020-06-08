@@ -28,11 +28,29 @@ button.submit {
   }
 }
 
+button.warning{
+  background-color: $base-color-darker; 
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  font-weight: 700;
+}
+
 button.primary{
   background-color: $base-color-darker;
   color: white;
+  border: none;
   height: auto;
-  border-color: transparent;
+}
+
+.button-row{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+
+  button{
+    width: 45%;
+  }  
 }
 
 .row-container{

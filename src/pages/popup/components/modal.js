@@ -2,10 +2,9 @@
 // Reference: https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/
 
 import React, { Component } from 'react';
-// import { CSSTransition } from 'react-transition-group';
 import Synchronize from './modals/synchronize';
 import Error from './modals/error';
-import '../scss/modal.scss';
+import Dialog from './modals/dialog';
 
 class Modal extends Component {
   constructor(props) {
@@ -19,10 +18,16 @@ class Modal extends Component {
 
   setModal() {
     const type = this.props.match.params.id.substr(1);
+    const { location } = this.props;
     if (type === 'synchronize') {
       return <Synchronize locked={this.state.locked} lockModal={this.lockModal} />;
     } else if (type === 'error') {
       return <Error />;
+    } else if (type === 'dialog') {
+      if (location.state) {
+        const { content, returnTo, waitFor } = location.state;
+        return <Dialog content={content} returnTo={returnTo} waitFor={waitFor} />;
+      } else { return 'Invalid dialog'; }
     } else { return 'Unknow modal'; }
   }
 
@@ -32,14 +37,8 @@ class Modal extends Component {
 
   render() {
     return (
-    // <div>
-    //   <CSSTransition
-    //     timeout={300}
-    //     classNames="modal-wrapper"
-    //   >
       <div
         role="button"
-        className="modal-wrapper-active"
         onClick={() => { if (!this.state.locked) this.props.history.goBack(); }}
       >
         <div
@@ -50,8 +49,6 @@ class Modal extends Component {
           {this.setModal()}
         </div>
       </div>
-    // </CSSTransition>
-    // </div>
     );
   }
 }

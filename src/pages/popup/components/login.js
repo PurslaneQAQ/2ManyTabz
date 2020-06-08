@@ -5,6 +5,7 @@ import Header from './sharedview/header';
 import { requestSignIn, requestSignUp } from '../../../shared/actions/loginactions';
 import { ignoreError, frontendError } from '../../../shared/actions/erroractions';
 import '../scss/login.scss';
+import '../scss/modal.scss';
 
 // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
@@ -77,7 +78,7 @@ class Login extends Component {
   checkPassword(e) {
     const password = e ? e.target.value : this.state.password;
     if (!password) {
-      this.props.frontendError('Please enter a valid email!');
+      this.props.frontendError('Please enter a password!');
       if (e)e.target.focus();
       return false;
     } else {
@@ -92,7 +93,7 @@ class Login extends Component {
   checkConfPw(e) {
     const confpw = e ? e.target.value : this.state.password;
     if (!confpw) {
-      this.props.frontendError('Please enter a valid email!');
+      this.props.frontendError('Please enter the same password!');
       if (e)e.target.focus();
       return false;
     } else {
@@ -107,7 +108,7 @@ class Login extends Component {
   checkName(e) {
     const userName = e ? e.target.value : this.state.name;
     if (!userName || !/^[a-zA-Z]+$/.test(String(userName))) {
-      this.props.frontendError('Please enter a valid email!');
+      this.props.frontendError('Please enter a name consists of letters!');
       if (e)e.target.focus();
       return false;
     } else {

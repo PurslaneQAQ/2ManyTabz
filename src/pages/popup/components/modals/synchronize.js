@@ -36,9 +36,11 @@ class Synchronize extends Component {
     } else {
       return (
         <div>
-          Do you want to synchronize your local storage with cloud?
-          <button type="button" onClick={this.synchronizeClick}> Yes</button>
-          <button type="button" onClick={this.noSyncrhonizeClick}><Link to="/">No</Link></button>
+          <div>Do you want to synchronize your local storage with cloud?</div>
+          <div className="button-row">
+            <button type="button" onClick={this.synchronizeClick}> Yes</button>
+            <button type="button" onClick={this.noSyncrhonizeClick}><Link to="/">No</Link></button>
+          </div>
         </div>
       );
     }
