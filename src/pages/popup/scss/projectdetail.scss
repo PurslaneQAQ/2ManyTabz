@@ -15,10 +15,6 @@
   .note-button{
     border-style: none;
   }
-
-  #tab-list li > span:first-of-type{
-    width: calc(480px - 11rem);
-  }
 }
 
 #resource-view{
@@ -39,15 +35,6 @@
 #resource-list{
   li {
     padding: 9px;
-  }
-  
-  li>span:first-of-type {
-    width: calc(480px - 10rem);
-    display: inline-block;
-    margin-right: 1rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
 
   li img{
@@ -85,9 +72,16 @@
   input.tags-input:focus{
     border: solid 1px #ddd;
   }
-  
-  .edit-resource:hover{
-    cursor: default;
+
+  .edit-resource{
+    :hover{
+      cursor: auto;
+    }
+
+    >div:first-child{
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   span{
@@ -95,7 +89,10 @@
   }
 
   .url{
+    margin: 2px;
     margin-left: 28px;
+    font-size: 11px;
+    color: $base-color-darker;
     word-wrap: break-word;
   }
 

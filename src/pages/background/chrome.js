@@ -25,13 +25,13 @@ function captureTab(callback) {
       const ctx = canvas.getContext('2d');
       // set its dimension to target size
       canvas.width = 108;
-      canvas.height = (canvas.width / 4) * 3;
+      canvas.height = (canvas.width / 3) * 2;
       const img = new Image();
       img.src = imgUrl;
       img.onload = () => {
         const h = canvas.height;
         const w = (img.width * h) / img.height;
-        ctx.drawImage(img, ((h * 4) / 3 - w) / 2, 0, w, h);
+        ctx.drawImage(img, ((h * 3) / 2 - w) / 2, 0, w, h);
         // encode image to data-uri with base64 version of compressed image
         callback(canvas.toDataURL());
       };

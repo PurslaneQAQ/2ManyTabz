@@ -14,7 +14,7 @@ class ProjectCreator extends Component {
   }
 
   handleNameChange(e) {
-    this.setState({ projectName: e.target.value });
+    this.setState({ projectName: e.target.value.substr(0, 30) });
   }
 
   handleSubmitNew(e) {
@@ -42,7 +42,12 @@ class ProjectCreator extends Component {
     return (
       <form onSubmit={this.handleSubmitNew}>
         <div className="input-group">
-          <input type="text" name="title" placeholder="Project Name (should't contain / or \)" onBlur={this.handleNameChange} />
+          <input type="text"
+            name="title"
+            value={this.state.projectName}
+            placeholder="Project Name (should't contain / or \)"
+            onChange={this.handleNameChange}
+          />
           <button type="submit"> Add Project </button>
         </div>
       </form>

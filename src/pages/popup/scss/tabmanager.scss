@@ -123,12 +123,32 @@
   }
 
   li>span:first-of-type {
-    width: calc(480px - 7rem);
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin-right: 1rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+
+    span:first-of-type{
+      color:black;
+    }
+
+    svg{
+      font-size: 1.2rem;
+      margin-right: 1rem;
+    }
+
+    .trim-example{
+      max-width: 120px;
+      display: inline-block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: #888;
+      font-size: 11px;
+    }
+    .trim-example+span{
+      color: #888;
+      font-size: 11px;
+    }
   }
 
   li img{
