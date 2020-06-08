@@ -15,9 +15,9 @@ const DisplaySetting = (props) => {
         <input type="checkbox" name="viewType" checked={props.displayType === '0'} onChange={(e) => { props.switchView(`${!e.target.checked - 0}`); }} />
         <span className="slider">
           <span className="slide-content">
-            <span className={props.displayType === '0' ? 'active' : ''}>Grid View</span>
+            <span className={props.displayType === '0' ? 'active' : ''}>List View</span>
             <span className="ball" />
-            <span className={props.displayType === '1' ? 'active' : ''}>List View</span>
+            <span className={props.displayType === '1' ? 'active' : ''}>Grid View</span>
           </span>
         </span>
       </label>
