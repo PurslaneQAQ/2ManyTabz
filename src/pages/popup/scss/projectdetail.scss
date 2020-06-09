@@ -85,15 +85,13 @@
     border: solid 1px #ddd;
   }
 
-  .edit-resource{
-    :hover{
-      cursor: auto;
-    }
+  .edit-resource>div:first-child{
+    display: flex;
+    justify-content: space-between;
+  }
 
-    >div:first-child{
-      display: flex;
-      justify-content: space-between;
-    }
+  .edit-resource:hover{
+    cursor: auto;
   }
 
   span{
@@ -123,6 +121,9 @@
       text-align: center;
     }
     button:hover{
+      cursor: pointer;
+    }
+    button svg:hover{
       cursor: pointer;
     }
   }
