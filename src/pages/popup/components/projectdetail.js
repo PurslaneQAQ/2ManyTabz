@@ -11,8 +11,6 @@ import { requestGetTabs } from '../../../shared/actions/tabactions';
 import {
   requestLoadResources, requestDeleteProject, switchProject, requestAddResources,
 } from '../../../shared/actions/projectactions';
-import '../scss/projectdetail.scss';
-
 
 class ProjectDetail extends Component {
   constructor(props) {

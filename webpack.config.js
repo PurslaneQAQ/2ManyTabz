@@ -9,7 +9,7 @@ require('@babel/polyfill');
 
 const PAGES_PATH = './src/pages';
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 // set to 'production' or 'development' in your env
 
 const finalCSSLoader = (env === 'production') ? MiniCssExtractPlugin.loader : { loader: 'style-loader' };

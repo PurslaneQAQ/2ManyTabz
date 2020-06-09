@@ -10,7 +10,6 @@ import Header from './sharedview/header';
 import Footer from './sharedview/footer';
 import { requestGetTabs } from '../../../shared/actions/tabactions';
 import { requestLoadProjects } from '../../../shared/actions/projectactions';
-import '../scss/tabmanager.scss';
 
 class TabManager extends Component {
   constructor(props) {

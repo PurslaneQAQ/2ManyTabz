@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import Header from './sharedview/header';
 import { requestSignIn, requestSignUp } from '../../../shared/actions/loginactions';
 import { ignoreError, frontendError } from '../../../shared/actions/erroractions';
-import '../scss/login.scss';
-import '../scss/modal.scss';
 
 // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {

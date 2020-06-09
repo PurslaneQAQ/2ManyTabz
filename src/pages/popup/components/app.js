@@ -12,7 +12,6 @@ import TabManager from './tabmanager';
 import ProjectDetail from './projectdetail';
 import Login from './login';
 import Modal from './modal';
-import '../scss/shared.scss';
 
 // FontAwesome notes: https://www.digitalocean.com/community/tutorials/how-to-use-font-awesome-5-with-react
 
