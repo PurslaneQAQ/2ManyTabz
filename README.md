@@ -61,63 +61,48 @@ Responsibility:
 
 ### Front-end: 
 #### App
-  * Routing to 3 pages and a modal
-  * A footer to control login status
+* Routing to 3 pages and modals
+* A footer to control login status
+ (Links to an external site.)TabManager:
 
-#### TabManager:  
-  What works:
-  * TabView
-    * Filter tabs according to title
-    * Switch between grid view and list view
-    * Show the screenshot for the grid view
-    * Click to go to a tab
-    * Click to close a tab
-    * Drag a tab to a project
-  * PojectList:
-    * Show projectlist (projectName + tabName + and n other tabs)
-    * Project with tabs that fullfill the filter would be assigned to a class: fits-filter 
-    * Switch active project (class : choosen)
-    * Create a new project (check if the name exists)
+#### TabView
+* Filter tabs according to title
+* Switch between grid view and list view
+* Capture and show the screenshot for the grid view
+* Click to go to a tab
+* Click to close a tab
+* Drag a tab to a project
 
-  Todo:
-    * Error display for creating project
-    * A better UI
+#### PojectList:
+* Show project list (projectName + tabName + and n other tabs)
+* Show projects with tabs that fulfill the filter as strong
+* Switch active project (class : choosen)
+* Close all the tabs in the project
+* Create a new project (check if the name exists)
+* (Links to an external site.)ProjectDetail:
 
-#### ProjectDetail:
-  What works:
-  * ProjectEditor:
-    * Edit the name and note of a project
-  * TabView:
-    * Basicly the same as tab manager (open/close), but can not drag a tab
-    * Add a tab to current project
-  * ResourceView:
-    * Filter: select box + input, filter by tab or title
-    * OpenAll: open all the tabs that fits the filter
-    * Open one tab: by clicking a resource
-    * Update the resource: when the title and icon of the resource doesn't match the tab with same url
-    * Resource: Display the title and tags of a resource
-    * Click the down button to show detail of the resource and edit the tags
-    * Bluring event would upload the change of the tags
-    * Delete the resource
-  * Delete Project:
-    * Delete project and go back to tab manager if succeed
+#### ProjectEditor:
+* Edit the name and note of a project
+* TabView:
+* Basicly the same as tab manager (open/close), but can not drag a tab
+* Add a tab to current project
 
-  Todo: 
-  * handle error
+#### ResourceView:
+* Add all opened tabs in the project to resource
+* Filter: select box + input, filter by tab or title
+* OpenAll: open all the tabs that fits the filter
+* Open one tab: by clicking a resource
+* Update the resource: when the title and icon of the resource * doesn't match the tab with same url
+* Resource: Display the title and tags of a resource
+* Click the down button to show detail of the resource and edit the tags
+* Bluring event would upload the change of the tags
+* Delete the resource
 
-#### Login  
-  What works:
-  * Basic UI with two input boxes and a button
-  * Click button to the synchronize modal
-
-  Todo:
-  * Get input values
-  * Actually log in functions (and maybe also sign in)
-  * Log in reducer
-  * A better UI
+#### Delete Project:
+* Delete project and go back to tab manager if succeed
 
 #### Modal
-  Recently we only have one synchronize modal
+  Recently we have a synchronize modal, a dialog modal and an error modal
   What works:
   * Click the background to close the modal and go back
   
@@ -201,6 +186,20 @@ Because this is an extension, prior to publication on the Chrome webstore, users
 ## Deployment
 Once you've finished the above, just click the new 2ManyTabs icon in your chrome window to pull up our beauiful UI and interact with the app!
 
+
+## Screenshots
+![communication among 3 parts](other_img/communication_for_3_parts.png)
+
+## GIFs
+
+### login and synchronize
+![login and synchronize](other_img/login_and_synchronize.gif)
+
+### Add All Tabs
+![Add All Tabs](other_img/addAllTabs.gif)
+
+### Switch Views
+![Switch Views](other_img/switchViews.gif)
 
 ## Authors
 * Yaorui Zhang
