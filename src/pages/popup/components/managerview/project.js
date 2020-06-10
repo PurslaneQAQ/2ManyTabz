@@ -31,7 +31,8 @@ const Project = (props) => {
         <span>{projectTitle}</span>
         {example ? <span className="trim-example">{`${example} `}</span> : ''}
         {ids.length > 1 ? <span>{`and ${ids.length - 1} other tabs `}</span> : ''}
-        {projectTitle === Values.defaultProject ? null : <button className="submit"><Link to={`/project/:${projectTitle}`}>Edit</Link></button> }
+        {projectTitle === Values.defaultProject
+          ? null : <Link to={`/project/:${projectTitle}`}><button className="submit">Edit</button></Link> }
       </span>
       {ids.length > 0 ? (
         <FontAwesomeIcon
