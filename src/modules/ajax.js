@@ -1,7 +1,7 @@
 import axios from 'axios';
 import ActionTypes from '../shared/actionTypes';
 
-// const rootUrl = 'http://localhost:9090/api';
+// const rootUrl = 'http://localhost:8080/api';
 const rootUrl = 'https://two-many-tabz.herokuapp.com/api';
 
 const serverError = (dispatch, error) => {
@@ -87,7 +87,6 @@ export function mergeProjects(dispatch, projects, callback) {
     axios.put(`${rootUrl}/projects`, projects, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }).then((response) => {
       dispatch({
         type: ActionTypes.MERGE_PROJECTS_FULLFILLED,
-        projectList: response.data,
       }); // Please check mergeProjectsRequested in aliases4projects for details
       setTimeout(() => {
         dispatch({

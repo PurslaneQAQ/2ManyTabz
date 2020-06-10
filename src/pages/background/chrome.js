@@ -158,9 +158,54 @@ function updateTabs(dispatch, prevState, _activeProj) {
   }
 }
 
+function addText2Icon(text) {
+  // const canvas = document.createElement('canvas');
+  // const ctx = canvas.getContext('2d');
+  // // set its dimension to target size
+  // canvas.width = 32;
+  // canvas.height = 32;
+  // const img = new Image();
+  // img.src = '../assets/icon/icon16.png';
+  // img.onload = () => {
+  //   const h = canvas.height;
+  //   const w = (img.width * h) / img.height;
+  //   ctx.drawImage(img, 8, 8, w, h);
+
+  // Reference: http://jsfiddle.net/robhawkes/gHCJt/
+  // ctx.strokeStyle = '#fff';
+  // ctx.fillStyle = '#fff';
+  // let cornerRadius = 5;
+  // ctx.fillRect(16 + (cornerRadius / 2), 16 + (cornerRadius / 2), 16 - cornerRadius, 16 - cornerRadius);
+  // ctx.lineJoin = 'round';
+  // ctx.lineWidth = cornerRadius;
+  // ctx.strokeRect(16 + (cornerRadius / 2), 16 + (cornerRadius / 2), 16 - cornerRadius, 16 - cornerRadius);
+
+  // ctx.strokeStyle = '#ddd';
+  // ctx.fillStyle = '#ddd';
+  // cornerRadius = 4;
+  // ctx.fillRect(17 + (cornerRadius / 2), 17 + (cornerRadius / 2), 14 - cornerRadius, 14 - cornerRadius);
+  // ctx.lineWidth = cornerRadius;
+  // ctx.strokeRect(17 + (cornerRadius / 2), 17 + (cornerRadius / 2), 14 - cornerRadius, 14 - cornerRadius);
+
+  // ctx.fillStyle = '#000';
+  // ctx.font = '12px Arial';
+  // ctx.fillText(text.substr(0, 1).toUpperCase(), 20, 29);
+  // // encode image to data-uri with base64 version of compressed image
+  // _chrome.browserAction.setIcon({ path: canvas.toDataURL() });
+  // };
+  if (text) {
+    _chrome.browserAction.setBadgeText({ text: text.substr(0, 1).toUpperCase() });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'rgb(99, 150, 245)' });
+  } else {
+    _chrome.browserAction.setBadgeText({ text: '' });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'transparent' });
+  }
+}
+
 export {
   chromeError,
   updateTabs,
   handleUpdateEvent,
+  addText2Icon,
   _chrome as chrome,
 };
