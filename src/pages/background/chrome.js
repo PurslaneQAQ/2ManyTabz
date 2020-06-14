@@ -2,6 +2,7 @@ import ActionTypes from '../../shared/actionTypes';
 
 // eslint-disable-next-line no-undef
 const _chrome = chrome;
+let lastUpdateTime = new Date();
 
 function chromeError(dispatch, error) {
   console.log(error);
@@ -62,55 +63,6 @@ function updateTab(prevTab, tab, activeProj, projectList, projectMap) {
   };
 }
 
-function handleUpdateEvent(dispatch, prevState, listenerMessage) {
-  if (listenerMessage) { // method is called by listener, don't need to fetch all tabs
-    const { type, tabId } = listenerMessage;
-    const { tabList } = prevState.tabs;
-    const tabWinList = {};
-    switch (type) {
-      case 'update':
-        _chrome.tabs.get(tabId, (tab) => {
-          const { projectList, activeProj } = prevState.projects;
-          if (!tabList[tab.windowId])tabList[tab.windowId] = {};
-          tabList[tab.windowId][tab.id] = updateTab(tabList[tab.windowId][tab.id], tab, activeProj, projectList);
-          if (tab.active === true && tab.status === 'complete') { // Only capture when the active tab has been loaded
-            captureTab((screenshot) => {
-              tabList[tab.windowId][tab.id].screenshot = screenshot;
-              dispatch({
-                type: ActionTypes.GET_TABS_FULLFILLED,
-                tabs: { tabList, activeTab: tab.id },
-              });
-            });
-          } else {
-            dispatch({
-              type: ActionTypes.TABS_UPDATED,
-              tabs: { tabList },
-            });
-          }
-        });
-        return;
-      case 'remove':
-        for (const window of Object.keys(tabList)) {
-          if (tabList[window][tabId]) {
-            Object.keys(tabList[window]).forEach((id) => {
-              if (id !== `${tabId}`) { tabWinList[id] = tabList[window][id]; }
-            });
-            tabList[window] = tabWinList;
-            break;
-          }
-        }
-        dispatch({
-          type: ActionTypes.TABS_REMOVED,
-          tabs: { tabList },
-          removed: tabId,
-        });
-        return;
-      default:
-        handleUpdateEvent(dispatch, prevState, null);
-    }
-  }
-}
-
 function updateTabs(dispatch, prevState, _activeProj) {
   const { projectList } = prevState.projects;
   try {
@@ -155,6 +107,61 @@ function updateTabs(dispatch, prevState, _activeProj) {
     });
   } catch (error) {
     chromeError(dispatch, error);
+  }
+}
+
+function handleUpdateEvent(dispatch, prevState, listenerMessage) {
+  if (listenerMessage) { // method is called by listener, don't need to fetch all tabs
+    const { type, tabId } = listenerMessage;
+    const { tabList } = prevState.tabs;
+    const { projectList, activeProj } = prevState.projects;
+    const tabWinList = {};
+    const curTime = new Date();
+    switch (type) {
+      case 'update':
+        _chrome.tabs.get(tabId, (tab) => {
+          if (!tabList[tab.windowId])tabList[tab.windowId] = {};
+          tabList[tab.windowId][tab.id] = updateTab(tabList[tab.windowId][tab.id], tab, activeProj, projectList);
+          if (tab.active === true && tab.status === 'complete') { // Only capture when the active tab has been loaded
+            captureTab((screenshot) => {
+              tabList[tab.windowId][tab.id].screenshot = screenshot;
+              dispatch({
+                type: ActionTypes.GET_TABS_FULLFILLED,
+                tabs: { tabList, activeTab: tab.id },
+              });
+            });
+          } else {
+            dispatch({
+              type: ActionTypes.TABS_UPDATED,
+              tabs: { tabList },
+            });
+          }
+          lastUpdateTime = curTime;
+        });
+        return;
+      case 'remove':
+        for (const window of Object.keys(tabList)) {
+          if (tabList[window][tabId]) {
+            Object.keys(tabList[window]).forEach((id) => {
+              if (id !== `${tabId}`) { tabWinList[id] = tabList[window][id]; }
+            });
+            tabList[window] = tabWinList;
+            break;
+          }
+        }
+        dispatch({
+          type: ActionTypes.TABS_REMOVED,
+          tabs: { tabList },
+          removed: tabId,
+        });
+        lastUpdateTime = curTime;
+        return;
+      default:
+        if (curTime.getTime() - lastUpdateTime.getTime() > 5000) {
+          updateTabs(dispatch, prevState, activeProj);
+          lastUpdateTime = curTime;
+        }
+    }
   }
 }
 
