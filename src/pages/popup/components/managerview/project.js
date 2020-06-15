@@ -14,7 +14,6 @@ const Project = (props) => {
   const projectClass = [];
   if (projectTitle === props.activeProj) projectClass.push('choosen');
   if (contains) projectClass.push('fits-filter');
-  const exampleTrim = example.length > 35 ? `${example.substr(0, 32)}...` : example;
   return (
     <li
       className={projectClass.join(' ')}
@@ -28,11 +27,12 @@ const Project = (props) => {
         />
       ) : null}
       <span>
-        <FontAwesomeIcon icon={['far', 'folder']} />&nbsp;
-        {projectTitle}&nbsp;
-        {example ? `: ${exampleTrim} ` : ''}
-        {ids.length > 1 ? `and ${ids.length - 1} other tabs ` : ''}
-        {projectTitle === Values.defaultProject ? null : <button className="submit"><Link to={`/project/:${projectTitle}`}>Edit</Link></button> }
+        <FontAwesomeIcon icon={['far', 'folder']} />
+        <span>{projectTitle}</span>
+        {example ? <span className="trim-example">{`${example} `}</span> : ''}
+        {ids.length > 1 ? <span>{`and ${ids.length - 1} other tabs `}</span> : ''}
+        {projectTitle === Values.defaultProject
+          ? null : <Link to={`/project/:${projectTitle}`}><button className="submit">Edit</button></Link> }
       </span>
       {ids.length > 0 ? (
         <FontAwesomeIcon

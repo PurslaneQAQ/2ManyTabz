@@ -1,3 +1,10 @@
+@import "./variables.scss";
+
+@keyframes rotate {
+  0%   {transform: rotate(0deg);}
+  40%  {transform: rotate(90deg);}
+}
+
 #project-detail{
   #tab-grid, #tab-list {
     height: 194px;
@@ -13,30 +20,33 @@
   .note-button{
     border-style: none;
   }
-
-  #tab-list li > span:first-of-type{
-    width: calc(480px - 11rem);
-  }
 }
 
 #resource-view{
   padding-top: 6px;
-  border-radius: 16px 0 0 0;
+  position: relative;
+  border-radius: 0 16px 0 0;
   background-color: white;
+}
+
+#resource-view>.resource-icon{
+  position: absolute;
+  display: inline-block;
+  top: 11px;
+  left: 7px;
+  font-size: 1.5rem;
+  color: $resource-color;
+}
+
+#resource-view>.resource-icon:hover{
+  cursor: pointer;
+  animation-name: rotate;
+  animation-duration: 1s;
 }
 
 #resource-list{
   li {
     padding: 9px;
-  }
-  
-  li>span:first-of-type {
-    width: calc(480px - 10rem);
-    display: inline-block;
-    margin-right: 1rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
 
   li img{
@@ -74,9 +84,14 @@
   input.tags-input:focus{
     border: solid 1px #ddd;
   }
-  
+
+  .edit-resource>div:first-child{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .edit-resource:hover{
-    cursor: default;
+    cursor: auto;
   }
 
   span{
@@ -84,7 +99,10 @@
   }
 
   .url{
+    margin: 2px;
     margin-left: 28px;
+    font-size: 11px;
+    color: $base-color-darker;
     word-wrap: break-word;
   }
 
@@ -101,6 +119,12 @@
       background-color: transparent;
       border-style: none;
       text-align: center;
+    }
+    button:hover{
+      cursor: pointer;
+    }
+    button svg:hover{
+      cursor: pointer;
     }
   }
 }

@@ -15,7 +15,7 @@ const ListTab = (props) => {
       onMouseUp={() => { props.requestSwitchTab(tab.id); }}
     >
       <img alt=" " src={tab.icon} />
-      <span>{tab.title}</span>
+      <span className="cut-title">{tab.title}</span>
       <CloseTabBtn tab={tab} />
       {editing ? (
         <SaveTabBtn tab={tab} />

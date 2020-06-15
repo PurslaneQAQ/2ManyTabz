@@ -8,9 +8,9 @@ import ResourceView from './detailview/resourceview';
 import Header from './sharedview/header';
 import Footer from './sharedview/footer';
 import { requestGetTabs } from '../../../shared/actions/tabactions';
-import { requestLoadResources, requestDeleteProject, switchProject } from '../../../shared/actions/projectactions';
-import '../scss/projectdetail.scss';
-
+import {
+  requestLoadResources, requestDeleteProject, switchProject, requestAddResources,
+} from '../../../shared/actions/projectactions';
 
 class ProjectDetail extends Component {
   constructor(props) {
@@ -37,12 +37,25 @@ class ProjectDetail extends Component {
     const { error } = this.props;
     if (error && error !== prevProps.error) {
       this.props.history.push({ pathname: '/modal:error', state: { modal: true } });
+      return;
+    }
+    const { location, activeProj } = this.props;
+    if (location && location !== prevProps.location && location.state && location.state.delete) {
+      this.state.deleteRequested = 1;
+      this.props.requestDeleteProject(activeProj);// Refresh would start when active project is changed
     }
   }
 
   handleDeleteProject() {
-    this.setState({ deleteRequested: 1 });
-    this.props.requestDeleteProject(this.props.activeProj);
+    this.props.history.push({
+      pathname: '/modal:dialog',
+      state: {
+        modal: true,
+        content: `Are you sure that you want to delete the project ${this.props.activeProj}?`,
+        returnTo: this.props.history.location.pathname,
+        waitFor: 'delete',
+      },
+    });
   }
 
   render() {
@@ -63,8 +76,8 @@ class ProjectDetail extends Component {
         {/* <DisplaySetting setFilter={this.setFilter} switchView={this.props.requestSwitchView} /> */}
         <ProjectEditor />
         <TabView editing tabs={tabShow} filter={this.state.filter} />
-        <ResourceView />
-        <div className="thin-row-container"><button type="button" onClick={this.handleDeleteProject}>Delete Project</button></div>
+        <ResourceView saveAllTabs={() => { this.props.requestAddResources(tabShow); }} />
+        <div className="thin-row-container"><button type="button" className="warning" onClick={this.handleDeleteProject}>Delete Project</button></div>
         <Footer />
       </div>
     );
@@ -79,5 +92,5 @@ const mapStateToProps = (reduxState) => ({
 });
 
 export default connect(mapStateToProps, {
-  requestGetTabs, requestDeleteProject, requestLoadResources, switchProject,
+  requestGetTabs, requestDeleteProject, requestLoadResources, requestAddResources, switchProject,
 })(ProjectDetail);

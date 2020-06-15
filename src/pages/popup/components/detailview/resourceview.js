@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Resource from './resource';
 import { requestOpenTabs } from '../../../../shared/actions/tabactions';
 
@@ -61,6 +62,7 @@ class ResourceView extends Component {
     }
     return (
       <div id="resource-view">
+        <FontAwesomeIcon icon="star" className="resource-icon" title="save all opened tabs as resources" onClick={() => this.props.saveAllTabs()} />
         <div className="thin-row-container">
           <div className="input-group">
             <select name="type" value={filter.type} onChange={(e) => { this.setFilterType(e.target.value); }}>

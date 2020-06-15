@@ -127,15 +127,18 @@ const addResourcesAlias = (req) => {
     if (authenticated) {
       const tabResources = {};
       tabs.forEach((tab) => {
-        tabResources[tab.url] = {
-          url: tab.url,
-          icon: tab.icon,
-          title: tab.title,
-          tags: [],
-        };
+        if (!currentProject.resources[tab.url]) {
+          tabResources[tab.url] = {
+            url: tab.url,
+            icon: tab.icon,
+            title: tab.title,
+            tags: [],
+          };
+        } // No duplicate
       });
       ajax.addResources(dispatch, currentProject.projectName, tabResources);
     } else {
+      console.log(tabs);
       tabs.forEach((tab) => {
         currentProject.resources[tab.url] = {
           url: tab.url,

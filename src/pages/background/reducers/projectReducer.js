@@ -1,10 +1,14 @@
 import ActionTypes from '../../../shared/actionTypes';
 import Values from '../../../shared/values';
+import { addText2Icon } from '../chrome';
 
 export default function projectReducer(state = {}, action) {
   const newState = state;
   switch (action.type) {
     case ActionTypes.SWITCH_PROJECT:
+      if (action.projectName !== Values.defaultProject) {
+        addText2Icon(action.projectName);
+      } else addText2Icon();
       return { ...state, activeProj: action.projectName };
 
     case ActionTypes.LOAD_PROJECTS_FULLFILLED:

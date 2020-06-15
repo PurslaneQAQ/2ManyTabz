@@ -2,6 +2,7 @@ import ActionTypes from '../../shared/actionTypes';
 
 // eslint-disable-next-line no-undef
 const _chrome = chrome;
+let lastUpdateTime = new Date();
 
 function chromeError(dispatch, error) {
   console.log(error);
@@ -25,13 +26,13 @@ function captureTab(callback) {
       const ctx = canvas.getContext('2d');
       // set its dimension to target size
       canvas.width = 108;
-      canvas.height = (canvas.width / 4) * 3;
+      canvas.height = (canvas.width / 3) * 2;
       const img = new Image();
       img.src = imgUrl;
       img.onload = () => {
         const h = canvas.height;
         const w = (img.width * h) / img.height;
-        ctx.drawImage(img, ((h * 4) / 3 - w) / 2, 0, w, h);
+        ctx.drawImage(img, ((h * 3) / 2 - w) / 2, 0, w, h);
         // encode image to data-uri with base64 version of compressed image
         callback(canvas.toDataURL());
       };
@@ -60,55 +61,6 @@ function updateTab(prevTab, tab, activeProj, projectList, projectMap) {
     project,
     screenshot,
   };
-}
-
-function handleUpdateEvent(dispatch, prevState, listenerMessage) {
-  if (listenerMessage) { // method is called by listener, don't need to fetch all tabs
-    const { type, tabId } = listenerMessage;
-    const { tabList } = prevState.tabs;
-    const tabWinList = {};
-    switch (type) {
-      case 'update':
-        _chrome.tabs.get(tabId, (tab) => {
-          const { projectList, activeProj } = prevState.projects;
-          if (!tabList[tab.windowId])tabList[tab.windowId] = {};
-          tabList[tab.windowId][tab.id] = updateTab(tabList[tab.windowId][tab.id], tab, activeProj, projectList);
-          if (tab.active === true && tab.status === 'complete') { // Only capture when the active tab has been loaded
-            captureTab((screenshot) => {
-              tabList[tab.windowId][tab.id].screenshot = screenshot;
-              dispatch({
-                type: ActionTypes.GET_TABS_FULLFILLED,
-                tabs: { tabList, activeTab: tab.id },
-              });
-            });
-          } else {
-            dispatch({
-              type: ActionTypes.TABS_UPDATED,
-              tabs: { tabList },
-            });
-          }
-        });
-        return;
-      case 'remove':
-        for (const window of Object.keys(tabList)) {
-          if (tabList[window][tabId]) {
-            Object.keys(tabList[window]).forEach((id) => {
-              if (id !== `${tabId}`) { tabWinList[id] = tabList[window][id]; }
-            });
-            tabList[window] = tabWinList;
-            break;
-          }
-        }
-        dispatch({
-          type: ActionTypes.TABS_REMOVED,
-          tabs: { tabList },
-          removed: tabId,
-        });
-        return;
-      default:
-        handleUpdateEvent(dispatch, prevState, null);
-    }
-  }
 }
 
 function updateTabs(dispatch, prevState, _activeProj) {
@@ -158,9 +110,109 @@ function updateTabs(dispatch, prevState, _activeProj) {
   }
 }
 
+function handleUpdateEvent(dispatch, prevState, listenerMessage) {
+  if (listenerMessage) { // method is called by listener, don't need to fetch all tabs
+    const { type, tabId } = listenerMessage;
+    const { tabList } = prevState.tabs;
+    const { projectList, activeProj } = prevState.projects;
+    const tabWinList = {};
+    const curTime = new Date();
+    switch (type) {
+      case 'update':
+        _chrome.tabs.get(tabId, (tab) => {
+          if (!tabList[tab.windowId])tabList[tab.windowId] = {};
+          tabList[tab.windowId][tab.id] = updateTab(tabList[tab.windowId][tab.id], tab, activeProj, projectList);
+          if (tab.active === true && tab.status === 'complete') { // Only capture when the active tab has been loaded
+            captureTab((screenshot) => {
+              tabList[tab.windowId][tab.id].screenshot = screenshot;
+              dispatch({
+                type: ActionTypes.GET_TABS_FULLFILLED,
+                tabs: { tabList, activeTab: tab.id },
+              });
+            });
+          } else {
+            dispatch({
+              type: ActionTypes.TABS_UPDATED,
+              tabs: { tabList },
+            });
+          }
+          lastUpdateTime = curTime;
+        });
+        return;
+      case 'remove':
+        for (const window of Object.keys(tabList)) {
+          if (tabList[window][tabId]) {
+            Object.keys(tabList[window]).forEach((id) => {
+              if (id !== `${tabId}`) { tabWinList[id] = tabList[window][id]; }
+            });
+            tabList[window] = tabWinList;
+            break;
+          }
+        }
+        dispatch({
+          type: ActionTypes.TABS_REMOVED,
+          tabs: { tabList },
+          removed: tabId,
+        });
+        lastUpdateTime = curTime;
+        return;
+      default:
+        if (curTime.getTime() - lastUpdateTime.getTime() > 5000) {
+          updateTabs(dispatch, prevState, activeProj);
+          lastUpdateTime = curTime;
+        }
+    }
+  }
+}
+
+function addText2Icon(text) {
+  // const canvas = document.createElement('canvas');
+  // const ctx = canvas.getContext('2d');
+  // // set its dimension to target size
+  // canvas.width = 32;
+  // canvas.height = 32;
+  // const img = new Image();
+  // img.src = '../assets/icon/icon16.png';
+  // img.onload = () => {
+  //   const h = canvas.height;
+  //   const w = (img.width * h) / img.height;
+  //   ctx.drawImage(img, 8, 8, w, h);
+
+  // Reference: http://jsfiddle.net/robhawkes/gHCJt/
+  // ctx.strokeStyle = '#fff';
+  // ctx.fillStyle = '#fff';
+  // let cornerRadius = 5;
+  // ctx.fillRect(16 + (cornerRadius / 2), 16 + (cornerRadius / 2), 16 - cornerRadius, 16 - cornerRadius);
+  // ctx.lineJoin = 'round';
+  // ctx.lineWidth = cornerRadius;
+  // ctx.strokeRect(16 + (cornerRadius / 2), 16 + (cornerRadius / 2), 16 - cornerRadius, 16 - cornerRadius);
+
+  // ctx.strokeStyle = '#ddd';
+  // ctx.fillStyle = '#ddd';
+  // cornerRadius = 4;
+  // ctx.fillRect(17 + (cornerRadius / 2), 17 + (cornerRadius / 2), 14 - cornerRadius, 14 - cornerRadius);
+  // ctx.lineWidth = cornerRadius;
+  // ctx.strokeRect(17 + (cornerRadius / 2), 17 + (cornerRadius / 2), 14 - cornerRadius, 14 - cornerRadius);
+
+  // ctx.fillStyle = '#000';
+  // ctx.font = '12px Arial';
+  // ctx.fillText(text.substr(0, 1).toUpperCase(), 20, 29);
+  // // encode image to data-uri with base64 version of compressed image
+  // _chrome.browserAction.setIcon({ path: canvas.toDataURL() });
+  // };
+  if (text) {
+    _chrome.browserAction.setBadgeText({ text: text.substr(0, 1).toUpperCase() });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'rgb(99, 150, 245)' });
+  } else {
+    _chrome.browserAction.setBadgeText({ text: '' });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'transparent' });
+  }
+}
+
 export {
   chromeError,
   updateTabs,
   handleUpdateEvent,
+  addText2Icon,
   _chrome as chrome,
 };

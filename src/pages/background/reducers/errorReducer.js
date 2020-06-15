@@ -9,7 +9,7 @@ const errorReducer = (state = {}, action) => {
     case ActionTypes.FRONTEND_ERROR:
       return { ...state, errorMsg: action.error };
     case ActionTypes.AUTH_ERROR:
-      return { ...state, errorMsg: action.error };
+      return { ...state, errorMsg: action.message };
     case ActionTypes.IGNORE_ERROR:
       return { ...state, errorMsg: '' };
     default:

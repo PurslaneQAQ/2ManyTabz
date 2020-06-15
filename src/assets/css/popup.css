@@ -52,7 +52,7 @@ button, input, select {
   box-sizing: border-box;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.8);
-  border: solid 1px #b4b4b4;
+  border: solid 1px #c9c9c9;
 }
 
 button:hover{

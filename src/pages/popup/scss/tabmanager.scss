@@ -3,69 +3,96 @@
 #display-setting{
   display: flex;
   justify-content: center;
-  margin: 0.6rem 0;
+  align-items: center;
+  margin: 0.6rem auto;
 
+  .search-bar{
+    position: relative;
+    flex-grow: 1;
+  }
+
+  .search-bar>svg{
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    color: #666;
+  }
+
+  .search-bar>input{
+    padding-left: 25px;
+    width: 100%;
+  }
+
+  /* Adapted from https://www.w3schools.com/howto/howto_css_switch.asp */
   /* The switch - the box around the slider */
   .switch {
+    margin-left: 20px;
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
+    overflow: hidden;
+    width: 72px;
+    height: 24px;
 
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-
-  input:checked + .slider {
-    background-color: $base-color-darker;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px $base-color-darker;
-  }
-
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-
-  .slider.round:before {
-    border-radius: 50%;
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      transition: .4s;
+      border-radius: 11px;
+    }
+  
+    .slider .slide-content {
+      position: absolute;
+      left: -40px;
+      bottom: 5px;
+      transition: .4s;
+      width: 120px;
+      .ball{
+        display: inline-block;
+        height: 18px;
+        width: 18px;
+        position: relative;
+        bottom: -5.5px;
+        margin: 0 2px;
+        border-radius: 50%;
+        background-color: #6396f5;
+      }
+      span{
+        color: transparent;
+        white-space: nowrap;
+        font-size: 10px;
+        transition: .4s;
+      }
+  
+      span.active{
+        color: $base-color-darker;
+      }
+    }
+  
+    input:checked + .slider {
+      background-color: white;
+    }
+  
+    input:focus + .slider {
+      box-shadow: 0 0 1px $base-color-darker;
+    }
+  
+    input:checked + .slider .slide-content {
+      -webkit-transform: translateX(47px);
+      -ms-transform: translateX(47px);
+      transform: translateX(47px);
+    }
   }
 }
 
@@ -96,12 +123,39 @@
   }
 
   li>span:first-of-type {
-    width: calc(480px - 7rem);
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin-right: 1rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+
+    span:first-of-type{
+      color:black;
+      margin-right: 5px;
+    }
+
+    svg{
+      font-size: 1.2rem;
+      margin-right: 1rem;
+    }
+
+    .trim-example{
+      max-width: 120px;
+      display: inline-block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: #888;
+      font-size: 11px;
+      margin-right: 5px;
+    }
+
+    .trim-example:nth-last-child(2) {
+      max-width: 200px;
+    }
+
+    .trim-example+span{
+      color: #888;
+      font-size: 11px;
+    }
   }
 
   li img{
@@ -116,7 +170,7 @@
     z-index: 999;
     left: 0;
     right: 0;
-    top: -0.5rem;
+    top: 0;
     bottom: 0;
   }
 
