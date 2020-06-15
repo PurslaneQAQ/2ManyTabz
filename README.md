@@ -1,5 +1,11 @@
 # 2 Many Tabz
 
+## Try it by yourself
+* Go to this page:  
+  https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa  
+  And click "Add to Chrome"
+* Turn on the extension by clicking the blue radio button at the bottom right corner of the extension box.
+
 ## Architecture
 
 ### Front-end: 
@@ -112,13 +118,6 @@ We use Express + MongoDB for the backend.
      * Name
      * Email
      * Password
-
-## Setup
-* Go to this page:  
-  https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa  
-  And click "Add to Chrome"
-* Turn on the extension by clicking the blue radio button at the bottom right corner of the extension box.
-
 
 ## Screenshots
 ![communication among 3 parts](other_img/communication_for_3_parts.png)
