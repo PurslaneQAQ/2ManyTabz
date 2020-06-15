@@ -254,6 +254,7 @@ li span.full-title{
       color: $resource-color;
     }
     div:last-of-type{
+      word-break: break-word;
       padding: 3.5px 4px;
     }
   }
