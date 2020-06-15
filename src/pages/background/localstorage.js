@@ -26,6 +26,10 @@ export function loadProjectList() {
   return loadFile('projectList', () => ([Values.defaultProject]));
 }
 
+export function loadTabList() {
+  return loadFile('tabList', () => ({}));
+}
+
 export function loadcurrentProject(projectName) {
   return loadFile(`proj-${projectName}`, () => (JSON.parse(Values.emptyProject)));
 }
@@ -36,6 +40,10 @@ export function loadPreferences() {
 
 export function saveProjectList(projectList) {
   return saveFile('projectList', projectList);
+}
+
+export function saveTabList(tabList) {
+  return saveFile('tabList', tabList);
 }
 
 export function savecurrentProject(projectName, projectNote, resources) {

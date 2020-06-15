@@ -1,6 +1,7 @@
 import ActionTypes from '../actionTypes';
 
 export function switchProject(projectName) {
+  localStorage.setItem('activeProj', projectName);
   return {
     type: ActionTypes.SWITCH_PROJECT,
     projectName,

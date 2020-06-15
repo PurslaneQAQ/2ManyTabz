@@ -126,7 +126,7 @@ function handleUpdateEvent(dispatch, prevState, listenerMessage) {
             captureTab((screenshot) => {
               tabList[tab.windowId][tab.id].screenshot = screenshot;
               dispatch({
-                type: ActionTypes.GET_TABS_FULLFILLED,
+                type: ActionTypes.TABS_UPDATED,
                 tabs: { tabList, activeTab: tab.id },
               });
             });
