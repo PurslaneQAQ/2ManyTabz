@@ -202,10 +202,10 @@ function addText2Icon(text) {
   // };
   if (text) {
     _chrome.browserAction.setBadgeText({ text: text.substr(0, 1).toUpperCase() });
-    _chrome.browserAction.setBadgeBackgroundColor({ color: 'rgb(99, 150, 245)' });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'rgba(99, 150, 245, 1)' });
   } else {
     _chrome.browserAction.setBadgeText({ text: '' });
-    _chrome.browserAction.setBadgeBackgroundColor({ color: 'transparent' });
+    _chrome.browserAction.setBadgeBackgroundColor({ color: 'rgba(1, 1, 1, 0)' });
   }
 }
 
