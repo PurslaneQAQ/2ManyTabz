@@ -157,7 +157,7 @@ function handleUpdateEvent(dispatch, prevState, listenerMessage) {
         lastUpdateTime = curTime;
         return;
       default:
-        if (curTime.getTime() - lastUpdateTime.getTime() > 5000) {
+        if (curTime.getTime() - lastUpdateTime.getTime() > 3000) {
           updateTabs(dispatch, prevState, activeProj);
           lastUpdateTime = curTime;
         }

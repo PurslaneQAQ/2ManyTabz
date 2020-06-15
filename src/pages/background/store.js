@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import { wrapStore, alias } from 'react-chrome-redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import throttle from 'lodash.throttle';
 import Values from '../../shared/values';
@@ -13,9 +13,9 @@ import {
 } from './localstorage';
 import reducer from './reducers/index';
 
-const logger = createLogger({
-  collapsed: true,
-});
+// const logger = createLogger({
+//   collapsed: true,
+// });
 
 const initialState = {
   tabs: {
@@ -48,7 +48,7 @@ const store = createStore(
   applyMiddleware(
     alias({ ...tabAliases, ...projectAliases, ...loginAliases }),
     thunk,
-    logger, // NOTE: logger _must_ be last in middleware chain
+    // logger, // NOTE: logger _must_ be last in middleware chain
   ),
 );
 
