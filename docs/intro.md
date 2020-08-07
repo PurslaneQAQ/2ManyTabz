@@ -19,7 +19,7 @@ We all run into the silly problem of having simply too many tabs open in a chrom
 - Delete a project
 
 <p align="center">
-  <img src="docs/images/switchViews.gif" alt = "Switch Views" width="40%">
+  <img src="_static/switchViews.gif" alt = "Switch Views" width="40%">
 </p>
 
 ### Work on resources
@@ -30,7 +30,7 @@ We all run into the silly problem of having simply too many tabs open in a chrom
 - Delete a resource
 
 <p align="center">
-  <img src="docs/images/addAllTabs.gif" alt = "Add All Tabs" width="40%">
+  <img src="_static/addAllTabs.gif" alt = "Add All Tabs" width="40%">
 </p>
 
 ### Synchronize your data to the cloud
@@ -39,7 +39,7 @@ We all run into the silly problem of having simply too many tabs open in a chrom
 - If the user choose to synchronize the data, then at the begining the local data would be uploaded to the server for merging. After that, each operation would change both the local data and data in the remote database
 
 <p align="center">
-  <img src="docs/images/login_and_synchronize.gif" alt = "login and synchronize" width="40%">
+  <img src="_static/login_and_synchronize.gif" alt = "login and synchronize" width="40%">
 </p>
 
 ## Try it by yourself
@@ -155,7 +155,7 @@ We use Express + MongoDB for the backend.
      * Password
 
 ## Screenshots
-![communication among 3 parts](docs/images/communication_for_3_parts.png)
+![communication among 3 parts](images/communication_for_3_parts.png)
 
 ## Authors
 * Yaorui Zhang
@@ -167,10 +167,10 @@ We use Express + MongoDB for the backend.
   
 ## Acknowledgments
 ### References
-* https://thoughtbot.com/blog/redux-for-chrome-extensions
-* https://blog.csdn.net/weixin_41646716/article/details/89375896
-* https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/
-* https://stackoverflow.com/questions/20958078/resize-a-base-64-image-in-javascript-without-using-canvas
-* https://dev.to/tchan/web-automation-using-puppeteer-inside-a-chrome-extension-318o
-* http://jsfiddle.net/robhawkes/gHCJt/
-* https://medium.com/@jrcreencia/persisting-redux-state-to-local-storage-f81eb0b90e7e
+* [https://thoughtbot.com/blog/redux-for-chrome-extensions](https://thoughtbot.com/blog/redux-for-chrome-extensions)
+* [https://blog.csdn.net/weixin_41646716/article/details/89375896](https://blog.csdn.net/weixin_41646716/article/details/89375896)
+* [https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/](https://blog.logrocket.com/building-a-modal-module-for-react-with-react-router/)
+* [https://stackoverflow.com/questions/20958078/resize-a-base-64-image-in-javascript-without-using-canvas](https://stackoverflow.com/questions/20958078/resize-a-base-64-image-in-javascript-without-using-canvas)
+* [https://dev.to/tchan/web-automation-using-puppeteer-inside-a-chrome-extension-318o](https://dev.to/tchan/web-automation-using-puppeteer-inside-a-chrome-extension-318o)
+* [http://jsfiddle.net/robhawkes/gHCJt/](http://jsfiddle.net/robhawkes/gHCJt/)
+* [https://medium.com/@jrcreencia/persisting-redux-state-to-local-storage-f81eb0b90e7e](https://medium.com/@jrcreencia/persisting-redux-state-to-local-storage-f81eb0b90e7e)
