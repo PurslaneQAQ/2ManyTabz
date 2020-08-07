@@ -1,9 +1,49 @@
 # 2 Many Tabz
 
+## Overview
+2ManyTabs is a chrome extension to help you manage your tabs. 
+
+We all run into the silly problem of having simply too many tabs open in a chrome window at a given time. We try to organize these by opening more windows.. then more.. maybe saving a bookmark or two here and there.. but we inevitably lose time struggling to navigate our research windows by icon and memory alone. Not to mention that, upon feeling too frustrated with the current state of our Chrome window, we all resort to just giving up and clicking that red x of doom at the top left corner. We wish there were a way to organize our research on-the-fly and without very much effort.
+
+2ManyTabz would be our solution for you. By using this extension, you would be able to rearrange your tabs easily and create **projects** to store your tabs as resourses.
+
+## What you can do with 2ManyTabz?
+
+- Create a project and work in the project
+- Open tabs in the project
+- Close tabs in the project
+- Drag tabs to the project
+- Search tabs by names (all the projects with tabs that fits the filter would be strengthen)
+- Switch working project
+- Edit a project (the default project: general is not editable), add notes, add "resources"(we'll talk about it in next session)
+- Delete a project
+
+<p align="center">
+  <img src="other_img/switchViews.gif" alt = "Switch Views" width="40%">
+</p>
+
+- When editing a project, you can add a tab as resource of the project
+- Add all the tabs showing in the project as resources at once!
+- Add tags to the resources
+- Filter the tags by title or by tags, then open all the resources that fits the filter at once!
+- Delete a resource
+
+<p align="center">
+  <img src="other_img/addAllTabs.gif" alt = "Add All Tabs" width="40%">
+</p>
+
+- If the user is not signed in, all the data about the projects would be stored in local storage
+- If the user has signed in, the data would be stored in the server's database
+- If the user choose to synchronize the data, then at the begining the local data would be uploaded to the server for merging. After that, each operation would change both the local data and data in the remote database
+
+<p align="center">
+  <img src="other_img/login_and_synchronize.gif" alt = "login and synchronize" width="40%">
+</p>
+
 ## Try it by yourself
-* Go to this page:  
+* You could simply go to this page:  
   https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa  
-  And click "Add to Chrome"
+  and click on "Add to Chrome"
 * Turn on the extension by clicking the blue radio button at the bottom right corner of the extension box.
 
 ## Architecture
@@ -121,17 +161,6 @@ We use Express + MongoDB for the backend.
 
 ## Screenshots
 ![communication among 3 parts](other_img/communication_for_3_parts.png)
-
-## GIFs
-
-### login and synchronize
-![login and synchronize](other_img/login_and_synchronize.gif)
-
-### Add All Tabs
-![Add All Tabs](other_img/addAllTabs.gif)
-
-### Switch Views
-![Switch Views](other_img/switchViews.gif)
 
 ## Authors
 * Yaorui Zhang
