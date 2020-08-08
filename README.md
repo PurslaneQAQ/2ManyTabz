@@ -156,14 +156,6 @@ We use Express + MongoDB for the backend.
 
 ## Screenshots
 ![communication among 3 parts](docs/images/communication_for_3_parts.png)
-
-## Authors
-* Yaorui Zhang
-* Jialing Wu
-* Katherine Taylor
-* Jackson Harris
-* Nathan Albrinck
-* Yunjin Tong
   
 ## Acknowledgments
 ### References
