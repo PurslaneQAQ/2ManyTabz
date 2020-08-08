@@ -44,7 +44,7 @@ We all run into the silly problem of having simply too many tabs open in a chrom
 
 ## Try it by yourself
 * You could simply go to this page:  
-  https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa  
+  [https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa](https://chrome.google.com/webstore/detail/2manytabz/lpddhdnkblogiooieonlanekgbkcmcoa)
   and click on "Add to Chrome"
 * Turn on the extension by clicking the blue radio button at the bottom right corner of the extension box.
 
